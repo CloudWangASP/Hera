@@ -19,16 +19,21 @@ function handleFileSelect(event){
 
 function generateButtons(configFile){
     if(!Array.isArray(configFile)){
-        console.log('配置文件格式错误！仅支持数组')
+        console.log('Configuration file format error! Array only support')
         return;
     }
 
     configFile.forEach((item, index) => {
         const button = document.createElement('button');
-        button.textContent = '规则名称';
-        button.addEventListener('click', () => {
-            console.log()
-
+        button.textContent = 'rule name';
+        button.addEventListener('click', async () => {
+            const wasmModule = new WebAssembly.Module(await fetch('../cpp/rule_fission.wasm').then(response => response.arrayBuffer()));
+            const wasmInstance = new WebAssembly.Instance(wasmModule,{});
+            const fissionFunc = wasmInstance.exports.add;
+            const a = 1;
+            const b = 2;
+            const result = fissionFunc(a, b);
+            console.log(result);
         });
         ruleBtnContainer.appendChild(button);
     });
