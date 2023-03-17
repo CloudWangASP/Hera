@@ -26,7 +26,7 @@ function generateButtons(configFile){
     configFile.forEach((item, index) => {
         const button = document.createElement('button');
         button.classList.add('button');
-        button.textContent = item;
+        button.textContent = item.name;
         button.addEventListener('click', async () => {
             const wasmModule = new WebAssembly.Module(await fetch('../cpp/rule_fission.wasm').then(response => response.arrayBuffer()));
             const wasmInstance = new WebAssembly.Instance(wasmModule,{});
@@ -35,7 +35,7 @@ function generateButtons(configFile){
             const b = 2;
             const result = fissionFunc(a, b);
             console.log(result);
-            alert(item);
+            alert(item.name);
         });
         ruleBtnContainer.appendChild(button);
     });

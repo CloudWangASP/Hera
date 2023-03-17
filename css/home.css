@@ -5,13 +5,15 @@
 }
   
 .button {
-    width: 200px;
-    height: 120px;
-    padding: 10px 20px;
+    height: 80px;
     margin: 10px;
     background-color: #007bff;
-    color: #fff;
+    color: #FFFFFF;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    word-wrap: break-word;
     font-size: 16px;
-    cursor: pointer;
+    white-space: normal;
 }
   
