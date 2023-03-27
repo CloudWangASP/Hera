@@ -1,16 +1,21 @@
 var myWebSocket;
 const ruleBtnContainer = document.getElementById('rule-btn-container');
 
+var modal;
+
+window.onload = function() {
+  modal = document.getElementById("myModal");
+};
+
+// 拖拽文件函数处理
 function handleFileSelect(event){
     event.preventDefault();
     const files = event.dataTransfer.files;
     if(files.length == 0){
         return;
     }
-
     const file = files[0];
     const reader = new FileReader();
-
     reader.onload = function(event){
         const configFile = JSON.parse(event.target.result);
         generateButtons(configFile)
@@ -18,6 +23,7 @@ function handleFileSelect(event){
     reader.readAsText(file);
 }
 
+// 动态生成规则触发按钮
 function generateButtons(configFile){
     if(!Array.isArray(configFile)){
         console.log('Configuration file format error! Array only support')
@@ -36,12 +42,17 @@ function generateButtons(configFile){
             const b = 2;
             const result = fissionFunc(a, b);
             console.log(result);
-            alert(item.name);
+            if(index == 0){
+                alert(item.name);
+            }else{
+                showModal();
+            }
         });
         ruleBtnContainer.appendChild(button);
     });
 }
 
+// 测试websocket链接
 function connectToWS() {
     var endpoint = document.getElementById("endpoint").value;
     if (myWebSocket !== undefined) {
@@ -67,6 +78,7 @@ function connectToWS() {
         console.log("Error!");
     };
 }
+
 function sendMsg() {
     var message = document.getElementById("myMessage").value;
     myWebSocket.send(message);
@@ -75,13 +87,17 @@ function closeConn() {
     myWebSocket.close();
 }
 
+// 屏蔽浏览器默认拦截
 document.addEventListener('dragover', function(event){
     event.preventDefault();
 });
 
 document.addEventListener('drop',handleFileSelect);
 
-
-
-
-
+// 弹窗控制
+function showModal() {
+  modal.style.display = "block";
+}
+function hideModal() {
+  modal.style.display = "none";
+}

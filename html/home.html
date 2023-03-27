@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,10 +8,12 @@
     <title>Hera</title>
     <link rel="stylesheet" href="../css/home.css">
 </head>
+
 <body>
     <div id="rule-btn-container"></div>
     <script src="../js/home.js"></script>
 
+    <!-- websocket测试区域 -->
     <form>
         connection to: <input type="text" id="endpoint" name="endpoint" value="ws://echo.websocket.org"  style="width: 200px" ><br>
     </form>
@@ -24,5 +27,13 @@
     <input type="button" onclick="sendMsg()" value="Send message" />
 
     <input type="button" onclick="closeConn()" value="Close connection" />
+
+    <!-- 弹窗的 HTML 结构 -->
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <p>当前功能暂未开放，解锁需要两杯奶茶！</p>
+        <button class="cancel-button" onclick="hideModal()">好的，马上去买！</button>
+      </div>
+    </div>
 </body>
 </html>
